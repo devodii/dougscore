@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  frontend:
+    image: node:18-alpine
+    container_name: doug-frontend
+    command: sh -c "cd /app && yarn dev"
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    volumes:
+      - ./packages/app:/app
+
+  db:
+    image: postgres:15.1
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "doug", "-d", "dougscore"]
+      interval: 30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+    environment:
+      - POSTGRES_USER=doug
+      - POSTGRES_PASSWORD=dougscore!
+      - POSTGRES_DB=dougscore
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432

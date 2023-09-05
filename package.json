@@ -1,0 +1,18 @@
+{
+  "name": "dougreview",
+  "version": "1.0.0",
+  "description": "Make dougscore much accessible with searchs and filters.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "docker-compose up",
+    "stop": "docker-compose down --remove-orphans",
+    "restart": "docker-compose down --remove-orphans && docker-compose up"
+  },
+  "keywords": [
+    "review",
+    "cars"
+  ],
+  "author": "Emmanuel Odii",
+  "license": "ISC"
+}
