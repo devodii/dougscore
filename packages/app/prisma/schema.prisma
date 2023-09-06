@@ -1,8 +1,59 @@
 generator client {
   provider = "prisma-client-js"
+    binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+}
+
+
+model Car {
+  id Int  @id @default(autoincrement())
+  model String
+  year Int
+  make String
+  weekend Weekend[]
+  daily Daily[]
+  other Other[]
+  dougscore Int
+}
+
+model Weekend {
+  id Int  @id @default(autoincrement())
+  styling Int 
+  acceleration Int
+  handling Int
+  funFact Int
+  coolFact Int
+  total Int @default(0)
+  car Car  @relation(fields: [carId], references: [id])
+  carId  Int
+
+}
+
+model Daily {
+  id Int @id @default(autoincrement())
+  features Int
+  comfort Int
+  quality Int
+  practical Int
+  value Int
+  total Int @default(0)
+
+  car Car @relation(fields: [carId], references: [id])
+  carId Int
+}
+
+model Other {
+  id Int @id @default(autoincrement())
+  country String?
+  town String?
+  vehicleCountry String? 
+  videoLink String?
+
+  car Car @relation(fields: [carId], references: [id])
+  carId Int
 }
