@@ -1,6 +1,7 @@
 import { Header } from "@/components/header";
 import "./globals.css";
 import type { Metadata } from "next";
+import { ModalProvider } from "@/components/context/modal.context";
 
 export const metadata: Metadata = {
   title: "Dougscore",
@@ -15,8 +16,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header />
-        {children}
+        <ModalProvider>
+          <Header />
+          {children}
+        </ModalProvider>
       </body>
     </html>
   );
