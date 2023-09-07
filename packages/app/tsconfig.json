@@ -21,7 +21,10 @@
     "paths": {
       "@/*": ["./src/*"],
       "@/context": ["./src/components/context"],
-      "@/ui/*": ["./src/components/ui/*"]
+      "@/ui/*": ["./src/components/ui/*"],
+      "@/table": ["./src/components/table/index.ts"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/prisma": ["./prisma"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

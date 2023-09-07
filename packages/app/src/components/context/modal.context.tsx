@@ -9,12 +9,21 @@ import {
   useState,
 } from "react";
 
-const ModalContext = createContext<any>({ isOpen: false, modalContent: null });
+const ModalContext = createContext<any>({
+  isOpen: false,
+  modalContent: null,
+  selectedMake: null,
+  selectedModel: null,
+  selectedYear: null,
+});
 
 export const ModalProvider = ({ children }: { children: ReactNode }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const [modalContent, setModalContent] = useState<any>(null);
+  const [selectedMake, setSelectedMake] = useState<any>(null);
+  const [selectedModel, setSelectedModel] = useState<any>(null);
+  const [selectedYear, setSelectedYear] = useState<any>(null);
 
   const openModal = useCallback((content: any) => {
     setIsOpen(true);
@@ -26,10 +35,25 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
     setModalContent(null);
   }, []);
 
-    // I dont need isOpen now. Maybe keep for later!
+  // I dont need isOpen now. Maybe keep for later!
   return (
     <ModalContext.Provider
-      value={{ openModal, closeModal, isOpen, modalContent }}
+      value={{
+        openModal,
+        closeModal,
+        isOpen,
+        modalContent,
+
+        // ? Default values for selection
+        selectedMake,
+        selectedModel,
+        selectedYear,
+
+        // ? Mutator fn's
+        setSelectedMake,
+        setSelectedModel,
+        setSelectedYear,
+      }}
     >
       {children}
     </ModalContext.Provider>
