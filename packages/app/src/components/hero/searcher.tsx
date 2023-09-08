@@ -128,11 +128,11 @@ const Searcher = ({ allModel, allMake, allYear }: Props) => {
 
       <div className="absolute w-full">{modalContent}</div>
 
-      <div className="my-4">
+      {/* <div className="my-4">
         <p>Selected Make: {selectedMake || "None"}</p>
         <p>Selected Model: {selectedModel || "None"}</p>
         <p>Selected Year: {selectedYear || "None"}</p>
-      </div>
+      </div> */}
     </div>
   );
 };

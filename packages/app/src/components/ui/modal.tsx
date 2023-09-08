@@ -3,7 +3,6 @@ import React, {
   ReactNode,
   forwardRef,
   memo,
-  useEffect,
 } from "react";
 
 // default: create modal with <div>

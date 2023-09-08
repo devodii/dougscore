@@ -15,7 +15,7 @@ interface Props {
 const FindByYear = ({ allYear, handleSelect }: Props) => {
   const router = useRouter();
   const { selectedMake, selectedModel, selectedYear } = useModal();
-  const url = `/car/${selectedMake}/${selectedModel}/${selectedYear}`;
+  const url = `/car/${selectedMake}/${selectedModel}/${selectedYear || 1994}`;
 
   return (
     <Modal
@@ -30,7 +30,8 @@ const FindByYear = ({ allYear, handleSelect }: Props) => {
           <li
             key={year}
             onClick={() => {
-              handleSelect(200);
+              handleSelect(year);
+              console.log(selectedYear);
               setTimeout(() => {
                 router.push(url.replace(/ /g, "-"));
               }, 1000);
