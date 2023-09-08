@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "@/ui/modal";
-import { removeDuplicates } from "@/lib";
+import { logger, removeDuplicates, sortByAlphabets } from "@/lib";
 
 interface Props {
   allMake: {
@@ -10,8 +10,14 @@ interface Props {
 }
 
 const FindByMake = ({ allMake, handleSelect }: Props) => {
-  const uniqueMakes = removeDuplicates(allMake.map((item) => item.make));
-  console.log(uniqueMakes);
+  /**
+   * loops through the makes, removes any (duplicate) data and sort.
+   * sortByAlphabets(['Tesla', 'Chervolet', 'Toyota']) => ['Chervolet', 'Tesla', 'Toyota']
+   */
+  const uniqueMakes = sortByAlphabets(
+    removeDuplicates(allMake.map((item) => item.make))
+  );
+  logger.log(uniqueMakes);
 
   return (
     <Modal
@@ -27,8 +33,6 @@ const FindByMake = ({ allMake, handleSelect }: Props) => {
           {make}
         </li>
       ))}
-
-     
     </Modal>
   );
 };

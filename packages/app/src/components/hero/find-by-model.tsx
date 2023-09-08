@@ -1,6 +1,7 @@
 import React from "react";
 import Modal from "@/ui/modal";
 import { useModal } from "../context";
+import { logger, removeDuplicates } from "@/lib";
 
 interface Props {
   allModel: {
@@ -12,14 +13,20 @@ interface Props {
 
 const FindByModel = ({ allModel, handleSelect }: Props) => {
   const { selectedMake } = useModal();
+  const uniqueModel = removeDuplicates(
+    allModel
+      .filter(({ make }) => make == selectedMake) //sort by make
+      .map((item) => item.model)
+  );
+  // logger.log(uniqueModel);
+
   return (
     <Modal
-      className="animate-pop-out border p-4 mt-4 border-black max-w-4xl mx-auto flex flex-col gap-1"
+      className="border p-4 mt-4 border-black max-w-4xl mx-auto flex flex-col gap-1"
       as={"ul"}
     >
-      {allModel
-        .filter(({ make }) => make == selectedMake) //sort by make
-        .map(({ model }: any) => (
+      {uniqueModel
+        .map((model) => (
           <li
             key={model}
             onClick={() => handleSelect(model)}

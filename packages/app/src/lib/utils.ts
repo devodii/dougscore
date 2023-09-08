@@ -7,3 +7,7 @@ export const removeDuplicates = (array: any[]) => {
   }
   return uniqueArray;
 };
+
+export const sortByAlphabets = (args: string[]): string[] => {
+  return [...args].sort((a, b) => a.localeCompare(b));
+};
