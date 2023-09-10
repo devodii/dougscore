@@ -19,8 +19,9 @@ export const getOneCar = async (
 ) => {
   return await prisma.car.findFirst({
     where: {
-      ...(make && { make }), // Only include make in the where clause if it's defined
-      ...(model && { model }), // Only include model if it's defined
+      // Only search if there's an arguement
+      ...(make && { make }),
+      ...(model && { model }),
       // ...(year && { year }),
     },
     select: {
@@ -28,7 +29,7 @@ export const getOneCar = async (
       make: true,
       year: true,
       dougscore: true,
-      weekend: {
+      weekends: {
         select: {
           acceleration: true,
           coolFact: true,
@@ -38,7 +39,7 @@ export const getOneCar = async (
           total: true,
         },
       },
-      daily: {
+      dailies: {
         select: {
           comfort: true,
           features: true,
@@ -46,14 +47,6 @@ export const getOneCar = async (
           quality: true,
           value: true,
           total: true,
-        },
-      },
-      other: {
-        select: {
-          country: true,
-          town: true,
-          vehicleCountry: true,
-          videoLink: true,
         },
       },
     },
