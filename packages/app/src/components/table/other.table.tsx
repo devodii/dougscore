@@ -5,33 +5,29 @@ interface Props {
   car: any;
 }
 export const OtherTable = ({ car }: Props) => {
-    const other: any = car;
-    logger.log('------------------')
-  logger.log({other});
+  const other: any = car[0];
+  logger.log({ other });
   return (
-    <table className="max-w-xs">
-      <thead className="w-full">
-        <tr>
-          <th className="border w-full text-center uppercase text-white bg-[#6aa84f]">
-            Filming location
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {other.map((item: any) =>
-          Object.entries(item).map(([key, value], index) => (
-            <tr
-              key={key}
-              className="w-full grid grid-cols-2 bg-[#404040] text-white"
-            >
-              <td className="capitalize py-1- px-4 border-[0.5px]  border-gray-500 ">
-                {key}
-              </td>
-              <td className="py-1 px-4 border">{value as any}</td>
-            </tr>
-          ))
-        )}
-      </tbody>
-    </table>
+    <section className="w-full max-w-[230px]">
+      <div className="w-full flex flex-col gap-6">
+        <div>
+          <h3 className="uppercase font-semibold lg:text-xl text-center">
+            Filming Location
+          </h3>
+          <div className="text-center lg:text-lg">
+            {`${other?.filmingCity}, ${other?.filmingState}`}
+          </div>
+        </div>
+
+        <div>
+          <h3 className="uppercase font-semibold lg:text-xl text-center">
+            Vehicle Country
+          </h3>
+          <div className="text-center lg:text-lg">
+            {`${other?.vehicleCountry}`}
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
