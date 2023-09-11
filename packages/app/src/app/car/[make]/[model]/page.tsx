@@ -1,9 +1,14 @@
-import React from 'react'
+"use client";
+
+import { useRouter } from "next/navigation";
+import React, { useEffect } from "react";
 
 const ModelPage = () => {
-  return (
-    <div>ModelPage</div>
-  )
-}
+  const router = useRouter();
+  useEffect(() => {
+    router.push("/");
+  }, [router]);
+  return <div>ModelPage</div>;
+};
 
-export default ModelPage
+export default ModelPage;
