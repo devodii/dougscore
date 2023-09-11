@@ -49,6 +49,14 @@ export const getOneCar = async (
           total: true,
         },
       },
+      other: {
+        select: {
+          filmingCity: true,
+          filmingState: true,
+          vehicleCountry: true,
+          videoLink: true,
+        },
+      },
     },
   });
 };
