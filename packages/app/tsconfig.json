@@ -24,7 +24,8 @@
       "@/ui/*": ["./src/components/ui/*"],
       "@/table": ["./src/components/table/index.ts"],
       "@/lib/*": ["./src/lib/*"],
-      "@/prisma": ["./prisma"]
+      "@/hooks": ["./src/hooks/index.ts"],
+      "@/prisma": ["./prisma"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
