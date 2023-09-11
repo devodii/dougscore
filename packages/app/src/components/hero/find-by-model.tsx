@@ -25,16 +25,17 @@ const FindByModel = ({ allModel, handleSelect }: Props) => {
       className="border p-4 mt-4 border-black max-w-4xl mx-auto flex flex-col gap-1"
       as={"ul"}
     >
-      {uniqueModel
-        .map((model) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        {uniqueModel.map((model) => (
           <li
             key={model}
             onClick={() => handleSelect(model)}
-            className="w-full md:w-1/3 px-4 py-2 hover:bg-[#f7f7f7] cursor-pointer"
+            className="w-full px-4 py-2 hover:bg-[#f7f7f7] cursor-pointer"
           >
             {model}
           </li>
         ))}
+      </div>
     </Modal>
   );
 };
