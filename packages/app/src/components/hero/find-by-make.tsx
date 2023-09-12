@@ -1,8 +1,9 @@
-import React, { useState, useTransition } from "react";
+import React, { useRef, useState, useTransition } from "react";
 import Modal from "@/ui/modal";
+import { Loader } from "@/ui/loader";
 import { logger, removeDuplicates, sortByAlphabets } from "@/lib";
 import { AiOutlineSearch } from "react-icons/ai";
-import { useDebounce } from "@/hooks";
+import { useClickOutside, useDebounce } from "@/hooks";
 
 interface Props {
   allMake: {
@@ -20,7 +21,7 @@ const FindByMake = ({ allMake, handleSelect }: Props) => {
   const uniqueMakes = sortByAlphabets(
     removeDuplicates(allMake.map((item: any) => item.make))
   );
-  logger.log(uniqueMakes);
+  // logger.log({uniqueMakes});
 
   const [searchState, setSearchState] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -35,7 +36,7 @@ const FindByMake = ({ allMake, handleSelect }: Props) => {
     // set loading to true when the search starts
     setIsLoading(true);
 
-    // Simulate a delay 0.5ms
+    // Simulate a delay 0.5s
     setTimeout(() => {
       // After the delay, set loading to false to indicate that the search is complete
       setIsLoading(false);
@@ -44,12 +45,16 @@ const FindByMake = ({ allMake, handleSelect }: Props) => {
     setSearchState(value);
   };
 
-  console.log({ filterBySearch });
+  // logger.log({ filterBySearch });
+
+  const ref = useRef<HTMLDivElement>(null);
+
+  useClickOutside(ref);
 
   return (
     <Modal
       className="animate-pop-out border p-4 pt-0 mt-4 border-black max-w-4xl mx-auto flex flex-col gap-1 max-h-[410px] overflow-y-auto"
-      as={"ul"}
+      ref={ref}
     >
       <div className="w-full bg-white flex justify-center sticky top-0 z-10 py-4 ">
         <div className="flex flex-1 max-w-lg mx-auto p-2 border items-center gap-2 rounded-lg">
@@ -63,27 +68,29 @@ const FindByMake = ({ allMake, handleSelect }: Props) => {
       </div>
       <div>
         {isLoading ? (
-          <p>Loading</p>
+          <Loader />
+        ) : filterBySearch.length === 0 ? (
+          <p className="text-center">No make found for that search</p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {debounce === ""
               ? uniqueMakes.map((make) => (
-                  <option
+                  <div
                     key={`${make}-${Math.random() * 2}`}
                     onClick={() => handleSelect(make)}
                     className="w-full px-4 py-3 hover:bg-[#f7f7f7] cursor-pointer"
                   >
                     <div> {make}</div>
-                  </option>
+                  </div>
                 ))
               : filterBySearch.map((make) => (
-                  <option
+                  <div
                     key={`${make}-${Math.random() * 2}`}
                     onClick={() => handleSelect(make)}
                     className="w-full px-4 py-3 hover:bg-[#f7f7f7] cursor-pointer"
                   >
-                    <div> {make}</div>
-                  </option>
+                    <div>{make}</div>
+                  </div>
                 ))}
           </div>
         )}

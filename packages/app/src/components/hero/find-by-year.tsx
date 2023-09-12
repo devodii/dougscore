@@ -1,8 +1,9 @@
-import React from "react";
+import { Dispatch, SetStateAction, useRef, useTransition } from "react";
 import Modal from "@/ui/modal";
 import { useModal } from "../context";
 import { useRouter } from "next/navigation";
-import { logger, removeDuplicates } from "@/lib";
+import { logger } from "@/lib";
+import { useClickOutside } from "@/hooks";
 
 interface Props {
   allYear: {
@@ -11,10 +12,12 @@ interface Props {
     model?: string;
   }[];
   handleSelect: (value: number) => void;
+  redirectState: Dispatch<SetStateAction<boolean>>;
 }
 
-const FindByYear = ({ allYear, handleSelect }: Props) => {
+const FindByYear = ({ allYear, handleSelect, redirectState }: Props) => {
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
   const { selectedMake, selectedModel, selectedYear } = useModal();
   const url = `/car/${selectedMake}/${selectedModel}/${selectedYear || 1994}`;
 
@@ -30,21 +33,26 @@ const FindByYear = ({ allYear, handleSelect }: Props) => {
 
   logger.log({ uniqueYear });
 
+  // add a ref to handle outer clicks.
+  const ref = useRef<HTMLDivElement>(null);
+  useClickOutside(ref);
+
   return (
     <Modal
-      className="border p-4 mt-4 border-black max-w-xs ml-[60%] flex flex-col gap-1"
-      as={"div"}
+      className="border p-4 mt-4 border-black max-w-[260px] ml-[60%] flex flex-col gap-1"
+      ref={ref}
     >
       {/* TODO: Loop through the array and display them dynamically! */}
       <li
         key={uniqueYear[0]?.make}
         onClick={() => {
           handleSelect(uniqueYear[0]?.year);
-          setTimeout(() => {
-            router.push(url.replace(/ /g, "-"));
-          }, 1000);
+          redirectState(isPending);
+          startTransition(() => {
+            router.push(url.replace(/ /g, ""));
+          });
         }}
-        className="w-full md:w-2/3 px-4 py-2 hover:bg-[#f7f7f7] cursor-pointer list-none"
+        className="w-full  px-4 py-2 hover:bg-[#f7f7f7] cursor-pointer list-none"
       >
         {uniqueYear[0]?.year}
       </li>

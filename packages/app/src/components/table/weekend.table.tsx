@@ -11,7 +11,7 @@ export const WeekendTable = ({ car }: Props) => {
   return (
     <div>
       {Array.isArray(weekendStats) && weekendStats.length > 0 ? (
-        <table className="w-full max-w-xs">
+        <table className="w-full">
           <thead className="w-full">
             <tr>
               <th className="border w-full text-center uppercase text-white bg-[#cc1500]">
