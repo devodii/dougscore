@@ -33,6 +33,7 @@ const Searcher: React.FC<Props> = ({ allModel, allMake, allYear }) => {
     selectedMake,
     selectedModel,
     selectedYear,
+    closeModal,
   } = useModal();
 
   const handleMakeSelection = (make: string) => {
@@ -58,13 +59,19 @@ const Searcher: React.FC<Props> = ({ allModel, allMake, allYear }) => {
   const renderModal = () => {
     if (modalContent === "make") {
       return (
-        <FindByMake allMake={allMake} handleSelect={handleMakeSelection} />
+        <FindByMake
+          allMake={allMake}
+          handleSelect={handleMakeSelection}
+        />
       );
     }
 
     if (modalContent === "model") {
       return (
-        <FindByModel allModel={allModel} handleSelect={handleModelSelection} />
+        <FindByModel
+          allModel={allModel}
+          handleSelect={handleModelSelection}
+        />
       );
     }
 

@@ -10,7 +10,7 @@ export const DailyTable = ({ car }: Props) => {
   return (
     <>
       {Array.isArray(dailyStat) && dailyStat.length > 0 ? (
-        <table className="max-w-xs">
+        <table>
           <thead className="w-full">
             <tr>
               <th className="border w-full text-center uppercase text-white bg-[#6aa84f]">
