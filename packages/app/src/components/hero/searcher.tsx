@@ -23,37 +23,62 @@ interface Props {
   }[];
 }
 
-const Searcher = ({ allModel, allMake, allYear }: Props) => {
-
+const Searcher: React.FC<Props> = ({ allModel, allMake, allYear }) => {
   const {
     openModal,
     modalContent,
-
-    // default values for option
-
-    selectedMake,
-    selectedModel,
-    selectedYear,
-
-    // setters for the option
     setSelectedMake,
     setSelectedModel,
     setSelectedYear,
+    selectedMake,
+    selectedModel,
+    selectedYear,
   } = useModal();
 
   const handleMakeSelection = (make: string) => {
     setSelectedMake(make);
     setSelectedModel(null);
     setSelectedYear(null);
+    // Set the modal content type to "model"
+    openModal("model");
   };
 
   const handleModelSelection = (model: string) => {
     setSelectedModel(model);
     setSelectedYear(null);
+    // Set the modal content type to "year"
+    openModal("year");
   };
 
   const handleYearSelection = (year: number) => {
     setSelectedYear(year);
+  };
+
+  // Render the appropriate modal based on modalContent
+  const renderModal = () => {
+    if (modalContent === "make") {
+      return (
+        <FindByMake allMake={allMake} handleSelect={handleMakeSelection} />
+      );
+    }
+
+    if (modalContent === "model") {
+      return (
+        <FindByModel allModel={allModel} handleSelect={handleModelSelection} />
+      );
+    }
+
+    if (modalContent === "year") {
+      return (
+        <FindByYear
+          allYear={allYear}
+          handleSelect={handleYearSelection}
+          redirectState={() => {}}
+        />
+      );
+    }
+
+    return null; // Handle other cases here
   };
 
   return (
@@ -61,14 +86,7 @@ const Searcher = ({ allModel, allMake, allYear }: Props) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mx-auto divide-x divide-gray-900 max-w-3xl flex-1 border-[1.5px] rounded-full p-4">
         <button
           className="flex items-center justify-around"
-          onClick={() =>
-            openModal(
-              <FindByMake
-                allMake={allMake}
-                handleSelect={handleMakeSelection}
-              />
-            )
-          }
+          onClick={() => openModal("make")}
         >
           <span className="text-black text-[18px]">
             {selectedMake === null ? "Select Make" : selectedMake}
@@ -77,19 +95,12 @@ const Searcher = ({ allModel, allMake, allYear }: Props) => {
         </button>
         <button
           className="flex items-center justify-around"
-          disabled={selectedMake === null}
-          onClick={() =>
-            openModal(
-              <FindByModel
-                allModel={allModel}
-                handleSelect={handleModelSelection}
-              />
-            )
-          }
+          disabled={!selectedMake}
+          onClick={() => openModal("model")}
         >
           <span
             className={` ${
-              selectedMake === null ? "text-gray-600" : "text-black"
+              selectedMake ? "text-black" : "text-gray-600"
             } text-[18px]`}
           >
             {selectedModel === null ? "Select Model" : selectedModel}
@@ -98,26 +109,12 @@ const Searcher = ({ allModel, allMake, allYear }: Props) => {
         </button>
         <button
           className="flex items-center justify-around"
-          disabled={
-            (selectedMake === null && selectedModel === null) ||
-            (selectedMake !== null && selectedModel === null)
-          }
-          onClick={() => {
-            openModal(
-              <FindByYear
-                allYear={allYear}
-                handleSelect={handleYearSelection}
-              />
-
-            );
-          }}
+          disabled={!selectedMake && !selectedModel}
+          onClick={() => openModal("year")}
         >
           <span
             className={` ${
-              (selectedMake === null && selectedModel === null) ||
-              (selectedMake !== null && selectedModel === null)
-                ? "text-gray-600"
-                : "text-black"
+              selectedMake && selectedModel ? "text-black" : "text-gray-600"
             } text-[18px]`}
           >
             {selectedYear === null ? "Select Year" : selectedYear}
@@ -126,7 +123,7 @@ const Searcher = ({ allModel, allMake, allYear }: Props) => {
         </button>
       </div>
 
-      <div className="absolute w-full">{modalContent}</div>
+      <div className="absolute w-full">{renderModal()}</div>
 
       {/* <div className="my-4">
         <p>Selected Make: {selectedMake || "None"}</p>

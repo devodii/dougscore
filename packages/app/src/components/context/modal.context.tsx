@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  ComponentType,
   ReactNode,
   createContext,
   useCallback,
@@ -20,10 +19,10 @@ const ModalContext = createContext<any>({
 export const ModalProvider = ({ children }: { children: ReactNode }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const [modalContent, setModalContent] = useState<any>(null);
-  const [selectedMake, setSelectedMake] = useState<any>(null);
-  const [selectedModel, setSelectedModel] = useState<any>(null);
-  const [selectedYear, setSelectedYear] = useState<any>(null);
+  const [modalContent, setModalContent] = useState<any | null>(null);
+  const [selectedMake, setSelectedMake] = useState<any | null>(null);
+  const [selectedModel, setSelectedModel] = useState<any | null>(null);
+  const [selectedYear, setSelectedYear] = useState<any | null>(null);
 
   const openModal = useCallback((content: any) => {
     setIsOpen(true);
@@ -35,13 +34,11 @@ export const ModalProvider = ({ children }: { children: ReactNode }) => {
     setModalContent(null);
   }, []);
 
-  // I dont need isOpen now. Maybe keep for later!
   return (
     <ModalContext.Provider
       value={{
         openModal,
         closeModal,
-        isOpen,
         modalContent,
 
         // ? Default values for selection
