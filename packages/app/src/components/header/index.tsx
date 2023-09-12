@@ -7,7 +7,7 @@ const DynamicComponent = dynamic(() => import("./super-text"));
 
 const Logo = () => {
   return (
-    <div className="text-2xl lg:text-3xl font-bold tracking-normal text-[#40ae4d]">
+    <div className="text-2xl lg:text-3xl font-bold tracking-normal text-[#40ae4d]" aria-label="Dougscore finder">
       Dougscore Finder
     </div>
   );

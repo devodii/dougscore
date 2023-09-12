@@ -18,8 +18,6 @@ These are the columns it has:
 - weekends
 - dailies
 
-<br/>
-
 #### The Weekend schema
 
 Has many-to-one relationship with `Car`
@@ -32,8 +30,6 @@ These are the columns it has:
 - funFact
 - coolFact
 - total
-
-  <br />
 
 #### The Daily schema
 
