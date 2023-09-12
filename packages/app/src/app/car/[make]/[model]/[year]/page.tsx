@@ -26,8 +26,8 @@ const YearPage = async ({ params: { year, model, make } }: Props) => {
       <section className="flex items-center gap-6 mt-6 w-full px-12 ">
         <div className="flex flex-[0.5] flex-col gap-4 lg:gap-6">
           {/* <PrimaryTable car={car} /> */}
-          <WeekendTable car={car?.weekend} />
-          <DailyTable car={car?.daily} />
+          <WeekendTable car={car?.weekends} />
+          <DailyTable car={car?.dailies} />
         </div>
 
         <iframe
