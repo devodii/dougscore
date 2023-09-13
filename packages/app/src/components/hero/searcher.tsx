@@ -1,9 +1,10 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import { useModal } from "../context/modal.context";
 import { BsChevronDown } from "react-icons/bs";
+import { Loader } from "../ui";
 
 const FindByMake = dynamic(() => import("./find-by-make"));
 const FindByModel = dynamic(() => import("./find-by-model"));
@@ -55,6 +56,8 @@ const Searcher: React.FC<Props> = ({ allModel, allMake, allYear }) => {
     setSelectedYear(year);
   };
 
+  const [redirecting, setRedirecting] = useState(false);
+
   // Render the appropriate modal based on modalContent
   const renderModal = () => {
     if (modalContent === "make") {
@@ -74,7 +77,7 @@ const Searcher: React.FC<Props> = ({ allModel, allMake, allYear }) => {
         <FindByYear
           allYear={allYear}
           handleSelect={handleYearSelection}
-          redirectState={() => {}}
+          redirectState={setRedirecting}
         />
       );
     }
@@ -84,44 +87,47 @@ const Searcher: React.FC<Props> = ({ allModel, allMake, allYear }) => {
 
   return (
     <div className="relative">
-      <div className="grid grid-cols-1 gap-2 md:grid-cols-3 mx-auto md:divide-x md:divide-gray-900 max-w-3xl flex-1 border-[1.5px] rounded-full p-4">
-        <button
-          className="flex items-center justify-around"
-          onClick={() => openModal("make")}
-        >
-          <span className="text-black text-[18px]">
-            {selectedMake === null ? "Select Make" : selectedMake}
-          </span>
-          <BsChevronDown className="font-semibold text-xl lg:text-[21px]" />
-        </button>
-        <button
-          className="flex items-center justify-around"
-          disabled={!selectedMake}
-          onClick={() => openModal("model")}
-        >
-          <span
-            className={` ${
-              selectedMake ? "text-black" : "text-gray-600"
-            } text-[18px]`}
+      <div className="flex items-center justify-center max-w-3xl mx-auto gap-1 lg:gap-2">
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-3 mx-auto md:divide-x md:divide-gray-900 flex-1 border-[1.5px] rounded-full p-4">
+          <button
+            className="flex items-center justify-around"
+            onClick={() => openModal("make")}
           >
-            {selectedModel === null ? "Select Model" : selectedModel}
-          </span>
-          <BsChevronDown className="font-semibold text-xl lg:text-[21px]" />
-        </button>
-        <button
-          className="flex items-center justify-around"
-          disabled={!selectedMake && !selectedModel}
-          onClick={() => openModal("year")}
-        >
-          <span
-            className={` ${
-              selectedMake && selectedModel ? "text-black" : "text-gray-600"
-            } text-[18px]`}
+            <span className="text-black text-[18px]">
+              {selectedMake === null ? "Select Make" : selectedMake}
+            </span>
+            <BsChevronDown className="font-semibold text-xl lg:text-[21px]" />
+          </button>
+          <button
+            className="flex items-center justify-around"
+            disabled={!selectedMake}
+            onClick={() => openModal("model")}
           >
-            {selectedYear === null ? "Select Year" : selectedYear}
-          </span>
-          <BsChevronDown className="font-semibold text-xl lg:text-[21px]" />
-        </button>
+            <span
+              className={` ${
+                selectedMake ? "text-black" : "text-gray-600"
+              } text-[18px]`}
+            >
+              {selectedModel === null ? "Select Model" : selectedModel}
+            </span>
+            <BsChevronDown className="font-semibold text-xl lg:text-[21px]" />
+          </button>
+          <button
+            className="flex items-center justify-around"
+            disabled={!selectedMake && !selectedModel}
+            onClick={() => openModal("year")}
+          >
+            <span
+              className={` ${
+                selectedMake && selectedModel ? "text-black" : "text-gray-600"
+              } text-[18px]`}
+            >
+              {selectedYear === null ? "Select Year" : selectedYear}
+            </span>
+            <BsChevronDown className="font-semibold text-xl lg:text-[21px]" />
+          </button>
+        </div>
+        {redirecting && <Loader />}
       </div>
 
       <div className="absolute w-full px-4 ">{renderModal()}</div>

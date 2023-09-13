@@ -49,6 +49,7 @@ const FindByYear = ({ allYear, handleSelect, redirectState }: Props) => {
           handleSelect(uniqueYear[0]?.year);
           redirectState(isPending);
           startTransition(() => {
+            redirectState(true);
             router.push(url.replace(/ /g, ""));
           });
         }}
