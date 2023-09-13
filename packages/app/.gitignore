@@ -15,8 +15,10 @@
 # production
 /build
 /prisma/migrations
-/prisma/*.prisma*
-/prisma/seed.ts
+/prisma/seed.*
+
+# Helps spin up docker with prod like data
+/prisma/lib
 
 # misc
 .DS_Store
