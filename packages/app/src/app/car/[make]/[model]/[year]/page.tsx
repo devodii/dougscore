@@ -65,7 +65,7 @@ const YearPage = async ({ params: { make, model, year } }: Props) => {
            * This should be the structure: ${`https://www.youtube.com/embed/${VIDEO_ID}`}
            */}
           <iframe
-            src="https://www.youtube.com/embed/xoyPbAz2P8E"
+            src="https://www.youtube.com/embed/8ZxskL1dZHY"
             className="w-[300px] sm:w-[350px] md:w-[440px] lg:w-[560px]"
             height="315"
             title="The Ferrari Daytona SP3 Is a $2.5 Million Dream Supercar"
