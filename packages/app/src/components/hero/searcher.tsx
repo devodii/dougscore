@@ -59,19 +59,13 @@ const Searcher: React.FC<Props> = ({ allModel, allMake, allYear }) => {
   const renderModal = () => {
     if (modalContent === "make") {
       return (
-        <FindByMake
-          allMake={allMake}
-          handleSelect={handleMakeSelection}
-        />
+        <FindByMake allMake={allMake} handleSelect={handleMakeSelection} />
       );
     }
 
     if (modalContent === "model") {
       return (
-        <FindByModel
-          allModel={allModel}
-          handleSelect={handleModelSelection}
-        />
+        <FindByModel allModel={allModel} handleSelect={handleModelSelection} />
       );
     }
 
@@ -90,7 +84,7 @@ const Searcher: React.FC<Props> = ({ allModel, allMake, allYear }) => {
 
   return (
     <div className="relative">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mx-auto divide-x divide-gray-900 max-w-3xl flex-1 border-[1.5px] rounded-full p-4">
+      <div className="grid grid-cols-1 gap-2 md:grid-cols-3 mx-auto md:divide-x md:divide-gray-900 max-w-3xl flex-1 border-[1.5px] rounded-full p-4">
         <button
           className="flex items-center justify-around"
           onClick={() => openModal("make")}
@@ -130,13 +124,7 @@ const Searcher: React.FC<Props> = ({ allModel, allMake, allYear }) => {
         </button>
       </div>
 
-      <div className="absolute w-full">{renderModal()}</div>
-
-      {/* <div className="my-4">
-        <p>Selected Make: {selectedMake || "None"}</p>
-        <p>Selected Model: {selectedModel || "None"}</p>
-        <p>Selected Year: {selectedYear || "None"}</p>
-      </div> */}
+      <div className="absolute w-full px-4 ">{renderModal()}</div>
     </div>
   );
 };

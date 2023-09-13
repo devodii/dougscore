@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useRef, useTransition } from "react";
-import Modal from "@/ui/modal";
-import { useModal } from "../context";
 import { useRouter } from "next/navigation";
+import { useModal } from "../context";
+import Modal from "@/ui/modal";
 import { logger } from "@/lib";
 import { useClickOutside } from "@/hooks";
 
@@ -31,7 +31,7 @@ const FindByYear = ({ allYear, handleSelect, redirectState }: Props) => {
     )
   );
 
-  logger.log({ uniqueYear });
+  // logger.log({ uniqueYear });
 
   // add a ref to handle outer clicks.
   const ref = useRef<HTMLDivElement>(null);
@@ -39,7 +39,7 @@ const FindByYear = ({ allYear, handleSelect, redirectState }: Props) => {
 
   return (
     <Modal
-      className="border p-4 mt-4 border-black max-w-[260px] ml-[60%] flex flex-col gap-1"
+      className="border p-4 mt-4 border-black md:max-w-[260px] md:ml-[60%] flex flex-col gap-1"
       ref={ref}
     >
       {/* TODO: Loop through the array and display them dynamically! */}

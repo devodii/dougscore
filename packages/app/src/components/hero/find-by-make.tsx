@@ -80,7 +80,7 @@ const FindByMake = ({ allMake, handleSelect }: Props) => {
                     onClick={() => handleSelect(make)}
                     className="w-full px-4 py-3 hover:bg-[#f7f7f7] cursor-pointer"
                   >
-                    <div> {make}</div>
+                    <div>{make}</div>
                   </div>
                 ))
               : filterBySearch.map((make) => (
