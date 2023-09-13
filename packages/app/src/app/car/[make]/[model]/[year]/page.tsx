@@ -18,7 +18,8 @@ const NoCarDisplay = memo(({ model }: { model: any }) => {
   return (
     <div className="flex items-center justify-center flex-col gap-4">
       <div className="text-lg text-center mt-12 lg:text-xl">
-        No data for this car, please search for a different one.
+        No information available for this car. We&apos;re working to add it
+        soon!
       </div>
       <Link
         href="/"
@@ -39,7 +40,13 @@ const YearPage = async ({ params: { make, model, year } }: Props) => {
   // Found out that some cars are null. Just improve UX.
   if (car === null) {
     // TODO: Implement an error service to catch models that are undefined.
-    <NoCarDisplay model={model} />;
+    logger.report(`Car with model ${model} not available, Please check!`);
+    return <NoCarDisplay model={model} />;
+  }
+
+  if (!Array.isArray(car?.other)) {
+    logger.report(`Car with other ${car?.other} not available, Please check!`);
+    return <NoCarDisplay model={model} />;
   }
 
   return (
