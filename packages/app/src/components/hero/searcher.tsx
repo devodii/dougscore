@@ -94,7 +94,7 @@ const Searcher: React.FC<Props> = ({ allModel, allMake, allYear }) => {
             onClick={() => openModal("make")}
           >
             <span className="text-black text-[18px]">
-              {selectedMake === null ? "Select Make" : selectedMake}
+              {selectedMake === null ? "Make" : selectedMake}
             </span>
             <BsChevronDown className="font-semibold text-xl lg:text-[21px]" />
           </button>
@@ -108,7 +108,7 @@ const Searcher: React.FC<Props> = ({ allModel, allMake, allYear }) => {
                 selectedMake ? "text-black" : "text-gray-600"
               } text-[18px]`}
             >
-              {selectedModel === null ? "Select Model" : selectedModel}
+              {selectedModel === null ? "Model" : selectedModel}
             </span>
             <BsChevronDown className="font-semibold text-xl lg:text-[21px]" />
           </button>
@@ -122,7 +122,7 @@ const Searcher: React.FC<Props> = ({ allModel, allMake, allYear }) => {
                 selectedMake && selectedModel ? "text-black" : "text-gray-600"
               } text-[18px]`}
             >
-              {selectedYear === null ? "Select Year" : selectedYear}
+              {selectedYear === null ? "Year" : selectedYear}
             </span>
             <BsChevronDown className="font-semibold text-xl lg:text-[21px]" />
           </button>
