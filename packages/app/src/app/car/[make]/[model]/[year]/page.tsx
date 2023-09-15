@@ -2,6 +2,7 @@ import React, { memo } from "react";
 import { getOneCar, logger } from "@/lib";
 import { WeekendTable, DailyTable, OtherTable } from "@/table";
 import Link from "next/link";
+import { BackButton } from "@/ui/back.button";
 
 // get route parameters
 interface Props {
@@ -23,7 +24,7 @@ const NoCarDisplay = memo(({ model }: { model: any }) => {
       </div>
       <Link
         href="/"
-        className="text-center text-white bg-blue-500 px-4 py-2 text-lg rounded-lg"
+        className="text-center text-white bg-blue-500 px-4 min-w-max py-2 text-lg rounded-lg"
       >
         Back to Search
       </Link>
@@ -50,9 +51,11 @@ const YearPage = async ({ params: { make, model, year } }: Props) => {
   }
 
   return (
-    <main className="continer mt-10 font-sans">
+    <main className="continer mt-6 font-sans">
       <div className="border-b">
-        <div className="flex items-center flex-wrap gap-4 max-w-2xl mx-auto ">
+        <div className="flex flex-col flex-wrap gap-4 max-w-2xl mx-auto ">
+          <BackButton />
+
           <div className="text-2xl lg:text-4xl">{`${year} ${make} ${model}`}</div>
         </div>
       </div>
