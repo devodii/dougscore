@@ -38,6 +38,9 @@ const YearPage = async ({ params: { make, model, year } }: Props) => {
   const car = await getOneCar(make);
   logger.log({ car });
 
+  const VIDEO_ID = car?.other[0].videoLink as string;
+  const ID = VIDEO_ID?.length > 5 ? VIDEO_ID : null;
+
   // Found out that some cars are null. Just improve UX.
   if (car === null) {
     // TODO: Implement an error service to catch models that are undefined.
@@ -53,7 +56,7 @@ const YearPage = async ({ params: { make, model, year } }: Props) => {
   return (
     <main className="continer mt-6 font-sans">
       <div className="border-b">
-        <div className="flex flex-col flex-wrap gap-4 max-w-2xl mx-auto ">
+        <div className="flex flex-col flex-wrap gap-4 px-2 md:px-0 max-w-2xl mx-auto ">
           <BackButton />
 
           <div className="text-2xl lg:text-4xl">{`${year} ${make} ${model}`}</div>
@@ -75,7 +78,7 @@ const YearPage = async ({ params: { make, model, year } }: Props) => {
            * This should be the structure: ${`https://www.youtube.com/embed/${VIDEO_ID}`}
            */}
           <iframe
-            src="https://www.youtube.com/embed/8ZxskL1dZHY"
+            src={`https://www.youtube.com/embed/${ID || "8ZxskL1dZHY"}`}
             className="w-[300px] sm:w-[350px] md:w-[440px] lg:w-[560px]"
             height="315"
             title="The Ferrari Daytona SP3 Is a $2.5 Million Dream Supercar"
