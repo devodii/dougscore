@@ -2,6 +2,7 @@ import { Header } from "@/components/header";
 import "./globals.css";
 import type { Metadata } from "next";
 import { ModalProvider } from "@/components/context/modal.context";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Dougscore finder",
@@ -36,6 +37,10 @@ export default function RootLayout({
           {children}
         </ModalProvider>
       </body>
+      <Script
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2642908073199820"
+        crossOrigin="anonymous"
+      />
     </html>
   );
 }
