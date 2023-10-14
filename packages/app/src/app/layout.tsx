@@ -48,11 +48,7 @@ export default function RootLayout({
        `}
       </Script>
 
-      <Script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2642908073199820"
-        crossOrigin="anonymous"
-      />
+      {/* Add google adesnse */}
       <meta name="google-adsense-account" content="ca-pub-2642908073199820" />
       <body>
         <ModalProvider>
