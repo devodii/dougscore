@@ -47,6 +47,7 @@ export default function RootLayout({
           });
        `}
       </Script>
+      <meta name="google-adsense-account" content="ca-pub-2642908073199820" />
       <body>
         <ModalProvider>
           <Header />
@@ -55,12 +56,6 @@ export default function RootLayout({
         <Analytics />
       </body>
       {/* eslint-disable-next-line @next/next/no-before-interactive-script-outside-document */}
-      <Script
-        async
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2642908073199820"
-        strategy="beforeInteractive"
-        crossOrigin="anonymous"
-      />
     </html>
   );
 }
