@@ -32,6 +32,21 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS}`}
+      />
+
+      <Script strategy="afterInteractive" id="google-analytics">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${process.env.GOOGLE_ANALYTICS}', {
+          page_path: window.location.pathname,
+          });
+       `}
+      </Script>
       <body>
         <ModalProvider>
           <Header />
@@ -39,8 +54,11 @@ export default function RootLayout({
         </ModalProvider>
         <Analytics />
       </body>
+      {/* eslint-disable-next-line @next/next/no-before-interactive-script-outside-document */}
       <Script
+        async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2642908073199820"
+        strategy="beforeInteractive"
         crossOrigin="anonymous"
       />
     </html>
